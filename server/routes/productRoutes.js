@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const productController = require("../controllers/productController");
+const { authorization } = require("../middlewares/authorization");
 
-router.get("/", productController.findAll);
-router.get("/:productId", productController.findById);
+router.get("/", productController.findAllByUser);
+router.get("/:productId", authorization, productController.findById);
 router.post("/", productController.create);
-router.put("/:productId", productController.update);
-router.delete("/:productId", productController.destroy);
+router.put("/:productId", authorization, productController.update);
+router.delete("/:productId", authorization, productController.destroy);
 
 module.exports = router;

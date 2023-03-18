@@ -2,8 +2,7 @@ const Product = require("../models/product");
 
 class ProductController {
 	static async create(req, res, next) {
-		// const { id } = req.user;
-		const id = "64156a97691c962699d4a7a7";
+		const { id } = req.user;
 		const { name, description, quantity, price, image } = req.body;
 		try {
 			const data = await Product.create({
@@ -39,6 +38,16 @@ class ProductController {
 		}
 	}
 
+	static async findAllByUser(req, res, next) {
+		const { id } = req.user;
+		try {
+			const data = await Product.findAllByUser(id);
+			res.status(200).json(data);
+		} catch (error) {
+			next(error);
+		}
+	}
+
 	static async findById(req, res, next) {
 		try {
 			const data = await Product.findByPk(req.params.productId);
@@ -54,8 +63,7 @@ class ProductController {
 	}
 
 	static async update(req, res, next) {
-		// const { id } = req.user;
-		const id = "64156a97691c962699d4a7a7";
+		const { id } = req.user;
 		const { name, description, quantity, price, image } = req.body;
 		try {
 			const product = await Product.findByPk(req.params.productId);

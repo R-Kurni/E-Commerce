@@ -27,6 +27,14 @@ class Product {
 		return await productCollection.find().toArray();
 	}
 
+	static async findAllByUser(id) {
+		const productCollection = this.products();
+		console.log(id);
+		const coba = await productCollection.find({ userId: id }).toArray();
+		console.log(coba);
+		return coba;
+	}
+
 	static async findByPk(productId) {
 		const productCollection = this.products();
 
