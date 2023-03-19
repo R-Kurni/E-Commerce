@@ -9,6 +9,11 @@ function productReducer(state = initialState, action) {
 				...state,
 				products: action.payload,
 			};
+		case "userProducts/fetchSuccess":
+			return {
+				...state,
+				products: action.payload,
+			};
 		default:
 			return state;
 	}
