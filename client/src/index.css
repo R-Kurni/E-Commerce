@@ -30,6 +30,52 @@
 	padding: 7% 0%;
 }
 
+.login-register {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	padding-bottom: 5%;
+}
+
+.card-login {
+	padding: 20px;
+}
+
+.tab-login {
+	width: 350px;
+}
+
+.BTN-login-register {
+	background-color: #eeeeee;
+	border-width: 2px;
+	border-color: #06b97a;
+	border-style: solid;
+	color: #06b97a;
+	padding: 10px;
+	border-radius: 8px;
+	font-weight: bold;
+	width: 100%;
+}
+
+.BTN-login-register:hover {
+	background-color: #06b97a;
+	border-width: 2px;
+	border-color: #06b97a;
+	border-style: solid;
+	color: #eeeeee;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link {
+	color: #bcbcbc;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link:hover {
+	color: #424242;
+}
+
 .home-content {
 	display: flex;
 	justify-content: center;
@@ -73,6 +119,9 @@
 	align-items: center;
 	color: white;
 	background-color: #06b97a;
+	border-width: 2px;
+	border-color: #06b97a;
+	border-style: solid;
 	height: 50px;
 	border-radius: 5px;
 	cursor: pointer;
@@ -80,7 +129,7 @@
 
 .add-to-cart-btn:hover {
 	color: #06b97a;
-	background-color: #c4efe0;
+	background-color: #eeeeee;
 }
 
 .no-product {
@@ -123,7 +172,7 @@
 }
 
 .BTN:hover {
-	background-color: #c4efe0;
+	background-color: #eeeeee;
 	border-width: 2px;
 	border-color: #06b97a;
 	border-style: solid;

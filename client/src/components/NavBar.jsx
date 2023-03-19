@@ -1,12 +1,19 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function NavBar() {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { user } = useSelector((state) => {
+		return state.user;
+	});
 	const handleLogout = () => {
 		localStorage.clear();
 		navigate("/");
 	};
+	useEffect(() => {}, [user]);
 	return (
 		<>
 			<Navbar className="NavBar-BG" sticky="top">
