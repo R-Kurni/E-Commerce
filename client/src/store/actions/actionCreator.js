@@ -65,6 +65,45 @@ export const createProduct = (formProduct) => {
 	};
 };
 
+export const updateProduct = ({ formProduct, id }) => {
+	return async (dispatch) => {
+		try {
+			const res = await fetch(`http://localhost:3000/products/${id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					access_token: localStorage.access_token,
+				},
+				body: JSON.stringify(formProduct),
+			});
+			const data = await res.json();
+			await dispatch(fetchUserProducts());
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const deleteProduct = (id) => {
+	return async (dispatch) => {
+		try {
+			const res = await fetch(`http://localhost:3000/products/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					access_token: localStorage.access_token,
+				},
+			});
+			const data = await res.json();
+			await dispatch(fetchUserProducts());
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
 // export const fetchCartsSuccess = (data) => {
 // 	return {
 // 		type: "carts/fetchSuccess",

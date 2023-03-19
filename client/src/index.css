@@ -134,3 +134,31 @@
 	height: 100px;
 	object-fit: contain;
 }
+
+.action-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.edit-btn {
+	background-color: #ffd966;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.delete-btn {
+	background-color: #db3030;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.modal-container {
+	padding-left: 20px;
+	padding-right: 20px;
+}

@@ -1,9 +1,9 @@
 import { Form, Modal, Row, Col, InputGroup } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { createProduct } from "../store/actions/actionCreator";
+import { updateProduct } from "../store/actions/actionCreator";
 
-export default function AddProductModal() {
+export default function EditProductModal({ product, id }) {
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
 	const [formProduct, setFormProduct] = useState({
@@ -30,9 +30,9 @@ export default function AddProductModal() {
 		setShow(true);
 	};
 
-	const submitAddProductHandler = (e) => {
+	const submitEditProductHandler = (e) => {
 		e.preventDefault();
-		dispatch(createProduct(formProduct));
+		dispatch(updateProduct({ formProduct, id }));
 		setShow(false);
 		setFormProduct({
 			name: "",
@@ -42,12 +42,21 @@ export default function AddProductModal() {
 			image: "",
 		});
 	};
+	useEffect(() => {
+		if (product) {
+			setFormProduct({
+				name: product.name,
+				description: product.description,
+				quantity: product.quantity,
+				price: product.price,
+				image: product.image,
+			});
+		}
+	}, [product]);
 	return (
 		<>
-			<div className="center">
-				<button className="BTN" type="submit" onClick={handleShow}>
-					+ Create New Product
-				</button>
+			<div className="edit-btn" type="submit" onClick={handleShow}>
+				Edit
 			</div>
 			<Modal
 				show={show}
@@ -57,9 +66,9 @@ export default function AddProductModal() {
 				aria-labelledby="contained-modal-title-vcenter"
 				centered
 			>
-				<Form onSubmit={submitAddProductHandler} className="modal-container">
+				<Form onSubmit={submitEditProductHandler} className="modal-container">
 					<Modal.Header closeButton>
-						<div className="Title-Name">Create New Product</div>
+						<div className="Title-Name">Edit Product</div>
 					</Modal.Header>
 					<Modal.Body>
 						<Row>
@@ -148,7 +157,7 @@ export default function AddProductModal() {
 					<Modal.Footer>
 						<div className="center">
 							<button className="BTN" type="submit">
-								+ Create New Product
+								Edit Product
 							</button>
 						</div>
 					</Modal.Footer>
