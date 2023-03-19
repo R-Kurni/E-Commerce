@@ -20,6 +20,9 @@ const errorHandler = (err, req, res, next) => {
 	} else if (err.name === "Forbidden") {
 		code = 403;
 		message = "Forbidden";
+	} else if (err.name == "Cart is empty") {
+		code = 400;
+		message = "Cart is empty";
 	}
 	console.log(err);
 	res.status(code).json({ message });
