@@ -4,12 +4,12 @@ const Product = require("../models/product");
 class CartController {
 	static async create(req, res, next) {
 		const { id } = req.user;
+		const { _id, name, description, price, image } = req.body;
 		try {
-			const product = await Product.findByPk(req.body.id);
+			const product = await Product.findByPk(_id);
 			if (!product) {
 				throw { name: "Product not found" };
 			}
-			const { _id, name, description, price, image } = product;
 			const productId = _id.toString();
 			const cart = await Cart.create({
 				productId,
