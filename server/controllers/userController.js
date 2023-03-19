@@ -41,7 +41,6 @@ class UserController {
 				id,
 			};
 			const access_token = encodeToken(payload);
-			console.log(access_token);
 			res.status(200).json({
 				access_token,
 			});

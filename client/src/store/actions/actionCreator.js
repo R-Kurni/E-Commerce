@@ -1,5 +1,52 @@
 import axios from "axios";
 
+export const register = (formRegister) => {
+	return async (dispatch) => {
+		try {
+			const res = await fetch("http://localhost:3000/users/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formRegister),
+			});
+			const data = await res.json();
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const fetchUserSuccess = (data) => {
+	return {
+		type: "user/fetchSuccess",
+		payload: data,
+	};
+};
+
+export const login = (formLogin) => {
+	return async (dispatch) => {
+		try {
+			const res = await fetch("http://localhost:3000/users/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formLogin),
+			});
+			const data = await res.json();
+			if (data.access_token) {
+				localStorage.setItem("access_token", data.access_token);
+			}
+			dispatch(fetchUserSuccess(data));
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
 export const fetchProductsSuccess = (data) => {
 	return {
 		type: "products/fetchSuccess",
