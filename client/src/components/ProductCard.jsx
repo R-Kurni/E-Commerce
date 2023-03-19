@@ -1,20 +1,19 @@
 import { Card, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { addToCart } from "../store/actions/actionCreator";
+import { addToCart } from "../store/actions/actionCreator";
 
 export default function ProductCard({ product }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const handleCart = () => {
-		// dispatch(addToCart(product?._id));
-		navigate("/cart");
+		dispatch(addToCart({ product }));
+		navigate("/");
 	};
 	const rupiah = (number) => {
 		return new Intl.NumberFormat("id-ID", {
 			style: "currency",
 			currency: "IDR",
-			minimumFractionDigits: 0,
 		}).format(number);
 	};
 	return (

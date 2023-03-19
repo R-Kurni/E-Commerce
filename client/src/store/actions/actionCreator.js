@@ -104,48 +104,82 @@ export const deleteProduct = (id) => {
 	};
 };
 
-// export const fetchCartsSuccess = (data) => {
-// 	return {
-// 		type: "carts/fetchSuccess",
-// 		payload: data,
-// 	};
-// };
+export const fetchCartsSuccess = (data) => {
+	return {
+		type: "carts/fetchSuccess",
+		payload: data,
+	};
+};
 
-// export const fetchCarts = () => {
-// 	return async (dispatch) => {
-// 		try {
-// 			const { data } = await axios({
-// 				method: "GET",
-// 				url: `http://localhost:3000/carts`,
-// 				headers: {
-// 					access_token: localStorage.access_token,
-// 				},
-// 			});
-// 			dispatch(fetchCartsSuccess(data));
-// 		} catch (error) {
-// 			console.log(error);
-// 		}
-// 	};
-// };
+export const fetchCarts = () => {
+	return async (dispatch) => {
+		try {
+			const { data } = await axios({
+				method: "GET",
+				url: `http://localhost:3000/carts`,
+				headers: {
+					access_token: localStorage.access_token,
+				},
+			});
+			dispatch(fetchCartsSuccess(data));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
 
-// export const addToCart = (id) => {
-// 	return async (dispatch) => {
-// 		console.log(JSON.stringify(id), "<<<<<<");
-// 		try {
-// 			const res = await fetch("http://localhost:3000/carts", {
-// 				method: "POST",
-// 				headers: {
-// 					"Content-Type": "application/json",
-// 					access_token: localStorage.access_token,
-// 				},
-// 				body: JSON.stringify(id),
-// 			});
-// 			const data = await res.json();
-// 			console.log(data, ">>>>>");
-// 			await dispatch(fetchCarts());
-// 			return data;
-// 		} catch (error) {
-// 			console.log(error);
-// 		}
-// 	};
-// };
+export const addToCart = ({ product }) => {
+	return async () => {
+		try {
+			const res = await fetch("http://localhost:3000/carts", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					access_token: localStorage.access_token,
+				},
+				body: JSON.stringify(product),
+			});
+			const data = await res.json();
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const deleteCart = (id) => {
+	return async (dispatch) => {
+		try {
+			const res = await fetch(`http://localhost:3000/carts/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					access_token: localStorage.access_token,
+				},
+			});
+			const data = await res.json();
+			await dispatch(fetchCarts());
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const destroyCart = () => {
+	return async () => {
+		try {
+			const res = await fetch(`http://localhost:3000/carts`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					access_token: localStorage.access_token,
+				},
+			});
+			const data = await res.json();
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
