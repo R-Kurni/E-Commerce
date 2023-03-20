@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
-import { deleteCart } from "../store/actions/actionCreator";
+import { deleteCartAlert } from "../store/actions/actionCreator";
 
 export default function CartListData({ cart, idx }) {
 	const dispatch = useDispatch();
 	const handleDelete = () => {
-		dispatch(deleteCart(cart._id));
+		dispatch(deleteCartAlert(cart._id));
 	};
 	const rupiah = (number) => {
 		return new Intl.NumberFormat("id-ID", {

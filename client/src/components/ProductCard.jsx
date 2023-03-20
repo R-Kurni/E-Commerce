@@ -18,7 +18,7 @@ export default function ProductCard({ product }) {
 	};
 	return (
 		<>
-			<Col md={3} className="card-list">
+			<Col className="col-3">
 				<Card>
 					<Card.Img variant="top" className="card-image" src={product?.image} />
 					<Card.Body>

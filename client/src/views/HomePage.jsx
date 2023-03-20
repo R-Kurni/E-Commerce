@@ -1,4 +1,4 @@
-import { Container, Row } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../store/actions/actionCreator";
@@ -23,7 +23,7 @@ export default function HomePage() {
 					</div>
 				) : (
 					<div className="yes-product-list">
-						<Row>
+						<Row className="card-list">
 							{products.map((product, idx) => {
 								return <ProductCard product={product} key={idx} />;
 							})}

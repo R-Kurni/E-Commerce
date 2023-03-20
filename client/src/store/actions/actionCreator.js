@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 
 export const register = (formRegister) => {
 	return async (dispatch) => {
@@ -11,6 +12,13 @@ export const register = (formRegister) => {
 				body: JSON.stringify(formRegister),
 			});
 			const data = await res.json();
+			swal({
+				title: "Register Successful!",
+				text: " ",
+				icon: "success",
+				buttons: false,
+				timer: 1500,
+			});
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -38,6 +46,13 @@ export const login = (formLogin) => {
 			const data = await res.json();
 			if (data.access_token) {
 				localStorage.setItem("access_token", data.access_token);
+				swal({
+					title: "Login Successful!",
+					text: " ",
+					icon: "success",
+					buttons: false,
+					timer: 1500,
+				});
 			}
 			dispatch(fetchUserSuccess(data));
 			return data;
@@ -104,6 +119,13 @@ export const createProduct = (formProduct) => {
 				body: JSON.stringify(formProduct),
 			});
 			const data = await res.json();
+			swal({
+				title: "Product Created!",
+				text: " ",
+				icon: "success",
+				buttons: false,
+				timer: 1500,
+			});
 			await dispatch(fetchUserProducts());
 			return data;
 		} catch (error) {
@@ -124,8 +146,40 @@ export const updateProduct = ({ formProduct, id }) => {
 				body: JSON.stringify(formProduct),
 			});
 			const data = await res.json();
+			swal({
+				title: "Product Updated!",
+				text: " ",
+				icon: "success",
+				buttons: false,
+				timer: 1500,
+			});
 			await dispatch(fetchUserProducts());
 			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const deleteProductAlert = (id) => {
+	return (dispatch) => {
+		try {
+			swal({
+				title: "Are you sure?",
+				text: "You are deleting this product from your store!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) => {
+				if (willDelete) {
+					swal("Product has been deleted!", {
+						icon: "success",
+						buttons: false,
+						timer: 1500,
+					});
+					dispatch(deleteProduct(id));
+				}
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -187,7 +241,50 @@ export const addToCart = ({ product }) => {
 				body: JSON.stringify(product),
 			});
 			const data = await res.json();
+			console.log(data);
+			if (data.message === "Invalid Token") {
+				swal({
+					title: "Please login!",
+					text: " ",
+					icon: "warning",
+					buttons: false,
+					timer: 1500,
+				});
+			} else {
+				swal({
+					title: "Product has been added to cart!",
+					text: " ",
+					icon: "success",
+					buttons: false,
+					timer: 1500,
+				});
+			}
 			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const deleteCartAlert = (id) => {
+	return (dispatch) => {
+		try {
+			swal({
+				title: "Are you sure?",
+				text: "You are removing this product from your cart!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) => {
+				if (willDelete) {
+					swal("Product has been removed!", {
+						icon: "success",
+						buttons: false,
+						timer: 1500,
+					});
+					dispatch(deleteCart(id));
+				}
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -224,6 +321,13 @@ export const destroyCart = () => {
 				},
 			});
 			const data = await res.json();
+			swal({
+				title: "Thank you for purchasing!",
+				text: " ",
+				icon: "success",
+				buttons: false,
+				timer: 1500,
+			});
 			return data;
 		} catch (error) {
 			console.log(error);
