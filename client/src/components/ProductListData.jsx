@@ -1,11 +1,11 @@
 import EditProductModal from "./EditProductModal";
 import { useDispatch } from "react-redux";
-import { deleteProduct } from "../store/actions/actionCreator";
+import { deleteProductAlert } from "../store/actions/actionCreator";
 
 export default function ProductListData({ product, idx }) {
 	const dispatch = useDispatch();
 	const handleDelete = () => {
-		dispatch(deleteProduct(product._id));
+		dispatch(deleteProductAlert(product._id));
 	};
 	const rupiah = (number) => {
 		return new Intl.NumberFormat("id-ID", {
